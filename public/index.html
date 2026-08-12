@@ -3,125 +3,652 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>somaticstudio | 適応的身体基盤の構築と実践</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>somaticstudio｜身体から、思考をととのえる。</title>
+    <meta name="description" content="somaticstudioは、身体感覚を手がかりに思考の暴走をしずめ、自分で自分を調整できる状態をつくる実践の場です。無料ニュースレターと公開ジャーナルから始められます。">
+    <link rel="canonical" href="https://somatic-studio-e53b8.web.app/">
+
+    <!-- OGP / SNSシェア時の表示 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="somaticstudio">
+    <meta property="og:title" content="somaticstudio｜身体から、思考をととのえる。">
+    <meta property="og:description" content="身体感覚を手がかりに思考の暴走をしずめ、自分で自分を調整できる状態をつくる実践の場。無料ニュースレターから始められます。">
+    <meta property="og:url" content="https://somatic-studio-e53b8.web.app/">
+    <meta property="og:image" content="https://somatic-studio-e53b8.web.app/assets/ogp.png">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="somaticstudio｜身体から、思考をととのえる。">
+    <meta name="twitter:description" content="身体感覚を手がかりに思考の暴走をしずめ、自分で自分を調整できる状態をつくる実践の場。">
+    <meta name="twitter:image" content="https://somatic-studio-e53b8.web.app/assets/ogp.png">
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#5a6e5a">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "somaticstudio",
+      "url": "https://somatic-studio-e53b8.web.app/",
+      "description": "身体感覚を手がかりに、自分で自分を調整できる状態をつくる実践の場。",
+      "founder": { "@type": "Person", "name": "大沼 竜也" }
+    }
+    </script>
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-34V43FRWKC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-34V43FRWKC');
+    </script>
+
+    <link rel="stylesheet" href="/assets/tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+JP:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Aesop風のブランディングと可読性を両立させるためのカスタムスタイル */
         body {
             font-family: 'Inter', 'Noto Serif JP', serif;
-            background-color: #f9f9f7; /* 少し温かみのあるオフホワイト */
-            color: #333333; /* ソフトなブラック */
+            background-color: #f9f9f7;
+            color: #333333;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Noto Serif JP', serif;
+        h1, h2, h3, h4, h5, h6 { font-family: 'Noto Serif JP', serif; }
+        .prose-custom { font-family: 'Noto Serif JP', serif; color: #333333; }
+        .prose-custom h2, .prose-custom h3 { font-family: 'Noto Serif JP', serif; font-weight: 500; color: #333333; }
+        .prose-custom p, .prose-custom li { font-family: 'Inter', 'Noto Serif JP', serif; font-weight: 400; }
+        .prose-custom strong { font-weight: 600; }
+
+        /* 固定ヘッダーに見出しが隠れないようにする */
+        section[id], article[id] { scroll-margin-top: 90px; }
+
+        /* フェードインは .js が付いたときだけ有効にする。
+           スクリプトが動かなかった場合に本文が透明のまま消えるのを防ぐため。 */
+        .js .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .js .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .js .fade-in-section { opacity: 1; transform: none; transition: none; }
+            html { scroll-behavior: auto; }
         }
-        .prose-custom {
-            font-family: 'Noto Serif JP', serif;
-            color: #333333;
-        }
-        .prose-custom h2, .prose-custom h3 {
-            font-family: 'Noto Serif JP', serif;
-            font-weight: 500;
-            color: #333333;
-        }
-        .prose-custom p, .prose-custom li {
-            font-family: 'Inter', 'Noto Serif JP', serif;
-            font-weight: 400;
-        }
-        .prose-custom strong {
-            font-weight: 600;
-        }
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+
         .brand-accent { color: #5a6e5a; }
         .bg-brand-accent { background-color: #5a6e5a; }
         .border-brand-accent { border-color: #5a6e5a; }
+
         header.scrolled {
-            background-color: rgba(249, 249, 247, 0.8);
+            background-color: rgba(249, 249, 247, 0.9);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
+
         .page-section { display: none; }
         .page-section.active { display: block; }
         #main-content.hidden { display: none; }
+
+        /* Tailwindの読み込みに失敗しても、開閉の制御だけは効くようにしておく */
+        #mobile-menu.hidden,
+        #icon-open.hidden,
+        #icon-close.hidden,
+        #login-form-wrapper.hidden,
+        #signup-form-wrapper.hidden,
+        #signup-plan-note.hidden { display: none; }
+
+        /* 写真が用意できるまでの暫定ビジュアル。画像に差し替える前提。 */
+        .visual-placeholder {
+            background-color: #e8eae4;
+            background-image: linear-gradient(135deg, #dfe3da 0%, #eceee8 50%, #e3e7de 100%);
+        }
+        .hero-visual {
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(90,110,90,0.16), transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(90,110,90,0.10), transparent 55%);
+        }
+
+        .skip-link {
+            position: absolute; left: -9999px; top: 0; z-index: 100;
+            background: #5a6e5a; color: #fff; padding: 0.75rem 1.25rem;
+        }
+        .skip-link:focus { left: 0; }
+
+        /* キーボード操作時のフォーカスを見えるように */
+        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+            outline: 2px solid #5a6e5a;
+            outline-offset: 2px;
+        }
     </style>
 </head>
 <body class="leading-relaxed">
 
-    <!-- Header -->
+    <a href="#main-content" class="skip-link">本文へスキップ</a>
+
+    <!-- ============================= Header ============================= -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" id="home-link" class="text-xl font-semibold tracking-wider cursor-pointer">somaticstudio</a>
-            <nav class="hidden md:flex items-center space-x-8 text-sm">
+            <a href="#" id="home-link" class="text-xl font-semibold tracking-wider">somaticstudio</a>
+
+            <!-- デスクトップ用ナビ -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm" aria-label="メインナビゲーション">
                 <a href="#philosophy" class="nav-link hover:text-brand-accent transition-colors">理論</a>
                 <a href="#practice" class="nav-link hover:text-brand-accent transition-colors">実践</a>
+                <a href="#newsletter" class="nav-link hover:text-brand-accent transition-colors">ニュースレター</a>
                 <a href="#journal" class="nav-link hover:text-brand-accent transition-colors">ジャーナル</a>
                 <a href="#pricing" class="nav-link hover:text-brand-accent transition-colors">プラン</a>
                 <a href="#about" class="nav-link hover:text-brand-accent transition-colors">主宰者について</a>
                 <a href="#contact" class="nav-link hover:text-brand-accent transition-colors">コンタクト</a>
                 <div id="auth-links" class="flex items-center space-x-4"></div>
             </nav>
-            <div class="md:hidden"></div>
+
+            <!-- モバイル用メニューボタン -->
+            <button id="menu-toggle" type="button"
+                    class="md:hidden inline-flex items-center justify-center p-2 -mr-2 rounded-md hover:bg-black/5 transition-colors"
+                    aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+                <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+                </svg>
+                <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
+
+        <!-- モバイル用メニュー本体 -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-[#f9f9f7] border-t border-gray-200 shadow-lg" aria-label="モバイルナビゲーション">
+            <div class="container mx-auto px-6 py-4 flex flex-col">
+                <a href="#philosophy" class="nav-link mobile-nav-link py-3 border-b border-gray-100">理論</a>
+                <a href="#practice" class="nav-link mobile-nav-link py-3 border-b border-gray-100">実践</a>
+                <a href="#newsletter" class="nav-link mobile-nav-link py-3 border-b border-gray-100">ニュースレター</a>
+                <a href="#journal" class="nav-link mobile-nav-link py-3 border-b border-gray-100">ジャーナル</a>
+                <a href="#pricing" class="nav-link mobile-nav-link py-3 border-b border-gray-100">プラン</a>
+                <a href="#faq" class="nav-link mobile-nav-link py-3 border-b border-gray-100">よくある質問</a>
+                <a href="#about" class="nav-link mobile-nav-link py-3 border-b border-gray-100">主宰者について</a>
+                <a href="#contact" class="nav-link mobile-nav-link py-3 border-b border-gray-100">コンタクト</a>
+                <div id="auth-links-mobile" class="pt-4 pb-2"></div>
+            </div>
+        </nav>
     </header>
 
     <div id="main-content">
         <main>
-            <!-- Hero Section -->
-            <section class="h-screen min-h-[600px] flex items-center justify-center relative">
-                <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://placehold.co/1920x1080/f9f9f7/333333?text=');"></div>
-                <div class="text-center z-10 px-6">
+            <!-- ============================= Hero ============================= -->
+            <section class="min-h-[85vh] md:h-screen md:min-h-[600px] flex items-center justify-center relative pt-24 pb-16">
+                <div class="absolute inset-0 hero-visual" aria-hidden="true"></div>
+                <div class="text-center z-10 px-6 max-w-4xl">
                     <h1 class="text-3xl md:text-4xl lg:text-5xl leading-tight tracking-wider">身体は、思考の乗り物ではない。<br class="hidden md:block">知性の源泉である。</h1>
                     <p class="mt-6 text-sm md:text-base max-w-2xl mx-auto">somaticstudioは、失われた身体との信頼関係を再構築し、次世代へ豊かな世界を橋渡しするための、知の実践体系です。</p>
+                    <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#newsletter" class="nav-link w-full sm:w-auto inline-block bg-brand-accent text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-opacity-80 transition-colors">
+                            まずは無料のニュースレターを受け取る
+                        </a>
+                        <a href="#philosophy" class="nav-link w-full sm:w-auto inline-block border border-gray-400 px-8 py-3 rounded-full text-sm font-medium hover:border-brand-accent hover:text-brand-accent transition-colors">
+                            考え方を読む
+                        </a>
+                    </div>
+                    <p class="mt-4 text-xs text-gray-500">登録は無料です。いつでも解除できます。</p>
                 </div>
             </section>
 
-            <!-- Sections: Philosophy, Practice, Journal -->
-            <section id="philosophy" class="py-20 md:py-32 fade-in-section"><!-- Content from previous version --><div class="container mx-auto px-6"><div class="text-center mb-16 md:mb-24"><h2 class="text-3xl md:text-4xl">理論 - Our Philosophy</h2><p class="mt-4 text-sm text-gray-600">適応的身体基盤の構築と実践</p></div><div class="max-w-4xl mx-auto space-y-20"><article class="fade-in-section"><h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">第一部：理論の哲学的基盤</h3><div class="prose prose-custom max-w-none text-lg leading-loose space-y-8"><div><h4 class="text-xl font-semibold mb-2">水に倣う - 適応性と変容の原理</h4><p>生命の本質は静的な安定にあるのではなく、動的な適応にあります。真に機能的な身体とは、水のように、いかなる環境、いかなる要求に対しても、その構造と機能を柔軟に変容させ、最適解を導き出すことができる身体です。</p></div><div><h4 class="text-xl font-semibold mb-2">生命の円環 - 「ゆるみ」と「硬化」の弁証法</h4><p>本理論は、不必要かつ非生産的な硬化、すなわち過去の経験によって固定化された身体的・精神的な防御パターンに、意図的に介入することを目指します。それは、硬化という必然の中で、いかにして生命の流動性を保ち続けるかという、成熟した問いへの応答です。</p></div></div></article><article class="fade-in-section"><h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">第二部：理論体系の核心</h3><div class="prose prose-custom max-w-none text-lg leading-loose"><h4 class="text-xl font-semibold mb-2">悪循環のメカニズム - なぜ我々は「閉ざされ」るのか</h4><p>身体がエネルギーを非効率に運用する状態（身体性不合理）に陥ると、脳は持続的なエラー信号を「不快」として知覚します。脳はこの原因不明の不快を説明するために「思考の暴走」を始め、結果として身体は持続的な防御モード「閉ざされ」の状態へと移行します。この状態では、私たちは学習する能力を著しく阻害されます。</p><div class="mt-8 p-6 border rounded-lg bg-white"><p class="font-semibold text-brand-accent">理論の核心概念</p><ul class="mt-4 list-disc pl-5 space-y-2 text-base"><li><strong>適応的身体基盤:</strong> 変化し続ける環境に応答し、自己を動的に組織化し続ける身体の機能的基盤。</li><li><strong>身体的合理性:</strong> 最小のエネルギーで最大のパフォーマンスを発揮する理想的な機能状態。</li><li><strong>内受容感覚推論:</strong> 脳と身体が、内部状態の予測と現実の誤差を修正し続ける自己調整システム。</li></ul></div></div></article><article class="fade-in-section"><h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">適応的身体基盤を構成する3つの能力</h3><div class="grid md:grid-cols-3 gap-8 text-center"><div class="p-6 bg-white rounded-lg shadow-sm"><h4 class="text-xl font-semibold mb-2">『ゆるむ』能力</h4><p class="text-sm">過剰な筋緊張から身体を解放する能力。全ての土台となります。</p></div><div class="p-6 bg-white rounded-lg shadow-sm"><h4 class="text-xl font-semibold mb-2">『組織分化』の能力</h4><p class="text-sm">脳が身体の各組織を明確に認識し、最適化されたパフォーマンスを可能にします。</p></div><div class="p-6 bg-white rounded-lg shadow-sm"><h4 class="text-xl font-semibold mb-2">『差異を知覚する』能力</h4><p class="text-sm">身体内部の微細な感覚の違いを知覚し、身体を自在にコントロールする能力です。</p></div></div></article></div></div></section>
-            <section id="practice" class="py-20 md:py-32 bg-white fade-in-section"><!-- Content from previous version --><div class="container mx-auto px-6"><div class="text-center mb-16 md:mb-24"><h2 class="text-3xl md:text-4xl">実践 - Our Practice</h2><p class="mt-4 text-sm text-gray-600">身体動態瞑想 (Kinetic Body Meditation)</p></div><div class="max-w-4xl mx-auto"><div class="prose prose-custom max-w-none text-lg leading-loose mb-12"><p>身体動態瞑想は、「快・不快」の身体感覚を唯一の羅針盤とし、意図的な身体運動を通じて「快」のシグナルを能動的に生成・増幅させることで、防御的な『閉ざされ』の状態から適応・学習的な『開かれ』の状態へと移行し、最終的に『適応的身体基盤』を涵養するための動的な実践技法です。</p><p>思考を無理に止めようとするのではなく、その土台である身体の「不快」を「快」に転換することで、結果として思考が自ずと鎮まる状態を目指します。</p></div><div class="grid md:grid-cols-2 gap-8"><div class="p-8 border rounded-lg fade-in-section"><h4 class="text-xl font-semibold mb-4 text-brand-accent">具体的なツール：「さする」</h4><p class="text-base">皮膚は、自己と非自己を分ける最大の境界です。皮膚表面を優しく、意識的に「さする」行為は、触覚を通じて外部世界との安全な関係性を再構築し、身体の輪郭を脳に再認識させます。</p></div><div class="p-8 border rounded-lg fade-in-section"><h4 class="text-xl font-semibold mb-4 text-brand-accent">具体的なツール：「ゆする」</h4><p class="text-base">身体を微細に「ゆする」行為は、筋肉や関節の深部感覚を刺激し、慢性的な筋緊張パターンをリセットします。これにより、身体内部の空間認識が正常化されます。</p></div></div><div class="text-center mt-16"><a href="#contact" class="inline-block bg-brand-accent text-white px-10 py-3 rounded-full text-sm font-medium hover:bg-opacity-80 transition-colors">セッションについて問い合わせる</a></div></div></div></section>
-            <section id="journal" class="py-20 md:py-32 fade-in-section"><!-- Content from previous version --><div class="container mx-auto px-6"><div class="text-center mb-16 md:mb-24"><h2 class="text-3xl md:text-4xl">ジャーナル - Journal</h2><p class="mt-4 text-sm text-gray-600 max-w-2xl mx-auto">身体をめぐる思索、理論の深掘り、そして実践の記録。</p></div><div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"><article class="bg-white p-6 rounded-lg shadow-sm flex flex-col"><h3 class="text-xl font-semibold mb-3">思考の暴走を止める、もう一つのアプローチ</h3><p class="text-sm text-gray-600 mb-4 flex-grow">なぜ心理アプローチだけでは不十分なのか。身体性不合理という観点から、思考の反芻が生まれる根本メカニズムを解説します。</p><div class="mt-auto pt-4 border-t border-gray-200"><a href="#" class="auth-required text-brand-accent text-sm font-semibold hover:underline">続きを読む →</a></div></article><article class="bg-white p-6 rounded-lg shadow-sm flex flex-col"><h3 class="text-xl font-semibold mb-3">「ゆるむ」とは何か？ - 脱力との決定的違い</h3><p class="text-sm text-gray-600 mb-4 flex-grow">多くの人が誤解する「ゆるむ」という概念。支持性を失わずに不必要な力みだけを手放す、その具体的な感覚と実践方法について論じます。</p><div class="mt-auto pt-4 border-t border-gray-200"><p class="text-sm text-gray-400">公開コンテンツ</p></div></article><article class="bg-white p-6 rounded-lg shadow-sm flex flex-col"><h3 class="text-xl font-semibold mb-3">実践記録：クライアントAの変化</h3><p class="text-sm text-gray-600 mb-4 flex-grow">長年の肩こりと不安感に悩まされていたクライアントが、「さする」と「ゆする」の実践を通じて、どのように自己調整能力を取り戻していったかの記録。</p><div class="mt-auto pt-4 border-t border-gray-200"><a href="#" class="auth-required text-brand-accent text-sm font-semibold hover:underline">続きを読む →</a></div></article></div></div></section>
+            <!-- ============================= はじめての方へ ============================= -->
+            <section id="start" class="py-20 md:py-28 bg-white fade-in-section">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="text-center mb-12 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl">こんな状態に、心当たりはありませんか</h2>
+                        <p class="mt-4 text-sm text-gray-600">専門用語の前に、まずここから。</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="p-6 border rounded-lg">
+                            <p class="text-base leading-relaxed">考えごとが止まらず、休んでいるはずなのに休まった気がしない。</p>
+                        </div>
+                        <div class="p-6 border rounded-lg">
+                            <p class="text-base leading-relaxed">肩や首の力みが慢性化していて、マッサージをしてもすぐ戻る。</p>
+                        </div>
+                        <div class="p-6 border rounded-lg">
+                            <p class="text-base leading-relaxed">「リラックスして」と言われても、力の抜き方が分からない。</p>
+                        </div>
+                    </div>
+                    <div class="prose prose-custom max-w-none text-base md:text-lg leading-loose mt-12">
+                        <p>somaticstudioでは、これらを「心の弱さ」ではなく、<strong>身体がエネルギーを非効率に使い続けている状態</strong>として捉えます。だから、考え方を変えようとするのではなく、身体の使い方から手をつけます。やることは「さする」「ゆする」といった、誰にでもできる地味な動きです。</p>
+                        <p>いきなり有料プランに申し込む必要はありません。まずは無料のニュースレターと、公開している記事から始めてください。</p>
+                    </div>
+                    <div class="text-center mt-10">
+                        <a href="#newsletter" class="nav-link inline-block bg-brand-accent text-white px-10 py-3 rounded-full text-sm font-medium hover:bg-opacity-80 transition-colors">無料で受け取る</a>
+                    </div>
+                </div>
+            </section>
 
-            <!-- Pricing Section (Updated) -->
-            <section id="pricing" class="py-20 md:py-32 bg-white fade-in-section">
-                 <div class="container mx-auto px-6">
+            <!-- ============================= 理論 ============================= -->
+            <section id="philosophy" class="py-20 md:py-32 fade-in-section">
+                <div class="container mx-auto px-6">
                     <div class="text-center mb-16 md:mb-24">
-                        <h2 class="text-3xl md:text-4xl">オンラインサロン - Plans</h2>
-                        <p class="mt-4 text-sm text-gray-600 max-w-2xl mx-auto">あなたの探求は、三つの段階を経て深化します。自己との対話から、他者との関わり、そして専門家との調律へ。まずはThe Libraryの扉を開けてみてください。</p>
+                        <h2 class="text-3xl md:text-4xl">理論 - Our Philosophy</h2>
+                        <p class="mt-4 text-sm text-gray-600">適応的身体基盤の構築と実践</p>
                     </div>
-                    <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                        <!-- The Library Plan -->
-                        <div class="border rounded-lg p-8 flex flex-col bg-white"><h3 class="text-2xl font-semibold">The Library</h3><p class="text-brand-accent mb-4 italic">個として存在する時間。自己との対話、その始まり。</p><p class="text-4xl font-bold mb-1">¥3,300<span class="text-lg font-normal"> / 月</span></p><hr class="my-6"><ul class="space-y-3 mb-8 flex-grow text-sm"><li>✔︎ オンライン自習コンテンツへのフルアクセス</li><li>&nbsp;&nbsp;&nbsp;&nbsp; (大沼水曜会, 身体動態瞑想会 etc.)</li><li>✔︎ 質問を配信等で回答する可能性</li></ul><button data-plan="library" class="plan-button mt-auto w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300 transition-colors">プランを選択</button></div>
-                        <!-- The Collective Plan -->
-                        <div class="border-2 border-brand-accent rounded-lg p-8 flex flex-col bg-white relative"><div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-accent text-white px-4 py-1 text-sm rounded-full">おすすめ</div><h3 class="text-2xl font-semibold">The Collective</h3><p class="text-brand-accent mb-4 italic">他者との関わりを通して、自己を知る。</p><p class="text-4xl font-bold mb-1">¥9,900<span class="text-lg font-normal"> / 月</span></p><hr class="my-6"><ul class="space-y-3 mb-8 flex-grow text-sm"><li>✔︎ ライブラリープランの全内容</li><li>✔︎ 月1回のグループカウンセリング</li></ul><button data-plan="collective" class="plan-button mt-auto w-full bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">プランを選択</button></div>
-                        <!-- The Essential Plan -->
-                        <div class="border rounded-lg p-8 flex flex-col bg-white"><h3 class="text-2xl font-semibold">The Essential</h3><p class="text-brand-accent mb-4 italic">専門家との対話による、的確な調律。</p><p class="text-4xl font-bold mb-1">¥33,000<span class="text-lg font-normal"> / 月</span></p><hr class="my-6"><ul class="space-y-3 mb-8 flex-grow text-sm"><li>✔︎ コレクティブプランの全内容</li><li>✔︎ 月1回の個人カウンセリング</li></ul><button data-plan="essential" class="plan-button mt-auto w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300 transition-colors">プランを選択</button></div>
+                    <div class="max-w-4xl mx-auto space-y-20">
+                        <article class="fade-in-section">
+                            <h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">第一部：理論の哲学的基盤</h3>
+                            <div class="prose prose-custom max-w-none text-lg leading-loose space-y-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-2">水に倣う - 適応性と変容の原理</h4>
+                                    <p>生命の本質は静的な安定にあるのではなく、動的な適応にあります。真に機能的な身体とは、水のように、いかなる環境、いかなる要求に対しても、その構造と機能を柔軟に変容させ、最適解を導き出すことができる身体です。</p>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-2">生命の円環 - 「ゆるみ」と「硬化」の弁証法</h4>
+                                    <p>本理論は、不必要かつ非生産的な硬化、すなわち過去の経験によって固定化された身体的・精神的な防御パターンに、意図的に介入することを目指します。それは、硬化という必然の中で、いかにして生命の流動性を保ち続けるかという、成熟した問いへの応答です。</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="fade-in-section">
+                            <h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">第二部：理論体系の核心</h3>
+                            <div class="prose prose-custom max-w-none text-lg leading-loose">
+                                <h4 class="text-xl font-semibold mb-2">悪循環のメカニズム - なぜ我々は「閉ざされ」るのか</h4>
+                                <p>身体がエネルギーを非効率に運用する状態（身体性不合理）に陥ると、脳は持続的なエラー信号を「不快」として知覚します。脳はこの原因不明の不快を説明するために「思考の暴走」を始め、結果として身体は持続的な防御モード「閉ざされ」の状態へと移行します。この状態では、私たちは学習する能力を著しく阻害されます。</p>
+                                <div class="mt-8 p-6 border rounded-lg bg-white">
+                                    <p class="font-semibold text-brand-accent">理論の核心概念</p>
+                                    <ul class="mt-4 list-disc pl-5 space-y-2 text-base">
+                                        <li><strong>適応的身体基盤:</strong> 変化し続ける環境に応答し、自己を動的に組織化し続ける身体の機能的基盤。</li>
+                                        <li><strong>身体的合理性:</strong> 最小のエネルギーで最大のパフォーマンスを発揮する理想的な機能状態。</li>
+                                        <li><strong>内受容感覚推論:</strong> 脳と身体が、内部状態の予測と現実の誤差を修正し続ける自己調整システム。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="fade-in-section">
+                            <h3 class="text-2xl md:text-3xl mb-6 border-b pb-4">適応的身体基盤を構成する3つの能力</h3>
+                            <div class="grid md:grid-cols-3 gap-8 text-center">
+                                <div class="p-6 bg-white rounded-lg shadow-sm">
+                                    <h4 class="text-xl font-semibold mb-2">『ゆるむ』能力</h4>
+                                    <p class="text-sm">過剰な筋緊張から身体を解放する能力。全ての土台となります。</p>
+                                </div>
+                                <div class="p-6 bg-white rounded-lg shadow-sm">
+                                    <h4 class="text-xl font-semibold mb-2">『組織分化』の能力</h4>
+                                    <p class="text-sm">脳が身体の各組織を明確に認識し、最適化されたパフォーマンスを可能にします。</p>
+                                </div>
+                                <div class="p-6 bg-white rounded-lg shadow-sm">
+                                    <h4 class="text-xl font-semibold mb-2">『差異を知覚する』能力</h4>
+                                    <p class="text-sm">身体内部の微細な感覚の違いを知覚し、身体を自在にコントロールする能力です。</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>
 
-            <!-- Sections: About, Contact -->
-            <section id="about" class="py-20 md:py-32 fade-in-section"><!-- Content from previous version --><div class="container mx-auto px-6 max-w-4xl"><div class="grid md:grid-cols-3 gap-12 items-center"><div class="md:col-span-1"><img src="https://placehold.co/400x500/cccccc/333333?text=Tatsuya+Onuma" alt="大沼竜也" class="rounded-lg w-full"></div><div class="md:col-span-2"><h2 class="text-3xl md:text-4xl mb-6">主宰者について</h2><div class="prose prose-custom max-w-none text-lg leading-loose"><p class="font-semibold text-xl">大沼 竜也</p><p>somaticstudio主宰。身体探求者。自らの長年の不調と向き合う中で、従来の心身アプローチの限界を痛感。その探求は、古今東西の哲学、最新の認知科学、そして何よりも自らの身体との対話へと向かった。</p><p>数多の試行錯誤の末、身体を土台として心身の統合を図る独自理論「適応的身体基盤」を構築。現在は、個々のクライアントが自らの内に眠る「身体知」を発見し、豊かな人生を創造するためのサポートを行っている。</p></div></div></div></div></section>
-            <section id="contact" class="py-20 md:py-32 bg-white fade-in-section"><!-- Content from previous version --><div class="container mx-auto px-6 max-w-2xl text-center"><h2 class="text-3xl md:text-4xl mb-6">コンタクト</h2><p class="mb-12">個人セッション、ワークショップ、その他のお問い合わせは、以下のフォームよりご連絡ください。身体という、最も身近な未開の地を探検する旅でお会いできることを楽しみにしています。</p><form action="#" method="POST" class="text-left space-y-6"><div><label for="name" class="block text-sm font-medium">お名前</label><input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><div><label for="email" class="block text-sm font-medium">メールアドレス</label><input type="email" id="email-contact" name="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><div><label for="message" class="block text-sm font-medium">お問い合わせ内容</label><textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></textarea></div><div><button type="submit" class="w-full bg-brand-accent text-white px-6 py-3 rounded-md text-base font-medium hover:bg-opacity-80 transition-colors">送信する</button></div></form></div></section>
+            <!-- ============================= 実践 ============================= -->
+            <section id="practice" class="py-20 md:py-32 bg-white fade-in-section">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 md:mb-24">
+                        <h2 class="text-3xl md:text-4xl">実践 - Our Practice</h2>
+                        <p class="mt-4 text-sm text-gray-600">身体動態瞑想 (Kinetic Body Meditation)</p>
+                    </div>
+                    <div class="max-w-4xl mx-auto">
+                        <div class="prose prose-custom max-w-none text-lg leading-loose mb-12">
+                            <p>身体動態瞑想は、「快・不快」の身体感覚を唯一の羅針盤とし、意図的な身体運動を通じて「快」のシグナルを能動的に生成・増幅させることで、防御的な『閉ざされ』の状態から適応・学習的な『開かれ』の状態へと移行し、最終的に『適応的身体基盤』を涵養するための動的な実践技法です。</p>
+                            <p>思考を無理に止めようとするのではなく、その土台である身体の「不快」を「快」に転換することで、結果として思考が自ずと鎮まる状態を目指します。</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="p-8 border rounded-lg fade-in-section">
+                                <h4 class="text-xl font-semibold mb-4 text-brand-accent">具体的なツール：「さする」</h4>
+                                <p class="text-base">皮膚は、自己と非自己を分ける最大の境界です。皮膚表面を優しく、意識的に「さする」行為は、触覚を通じて外部世界との安全な関係性を再構築し、身体の輪郭を脳に再認識させます。</p>
+                            </div>
+                            <div class="p-8 border rounded-lg fade-in-section">
+                                <h4 class="text-xl font-semibold mb-4 text-brand-accent">具体的なツール：「ゆする」</h4>
+                                <p class="text-base">身体を微細に「ゆする」行為は、筋肉や関節の深部感覚を刺激し、慢性的な筋緊張パターンをリセットします。これにより、身体内部の空間認識が正常化されます。</p>
+                            </div>
+                        </div>
+                        <div class="text-center mt-16">
+                            <a href="#contact" class="nav-link inline-block bg-brand-accent text-white px-10 py-3 rounded-full text-sm font-medium hover:bg-opacity-80 transition-colors">セッションについて問い合わせる</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= ニュースレター（無料の入口） ============================= -->
+            <section id="newsletter" class="py-20 md:py-28 fade-in-section">
+                <div class="container mx-auto px-6 max-w-3xl">
+                    <div class="bg-white border border-brand-accent rounded-lg p-8 md:p-12 text-center">
+                        <p class="text-sm text-brand-accent font-semibold tracking-wider mb-3">無料 / NEWSLETTER</p>
+                        <h2 class="text-3xl md:text-4xl mb-6">ニュースレター</h2>
+                        <div class="prose prose-custom max-w-none text-base md:text-lg leading-loose mb-8">
+                            <p>身体をめぐる思索と、今日から試せる小さな実践を、不定期でお届けします。有料プランに入る前に、まずはここで「合うかどうか」を確かめてください。</p>
+                        </div>
+
+                        <form id="newsletter-form" class="max-w-md mx-auto text-left space-y-4" novalidate>
+                            <div>
+                                <label for="newsletter-email" class="block text-sm font-medium mb-1">メールアドレス</label>
+                                <input type="email" id="newsletter-email" name="email" required autocomplete="email"
+                                       class="block w-full px-3 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"
+                                       placeholder="you@example.com">
+                            </div>
+                            <button type="submit" id="newsletter-submit"
+                                    class="w-full bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors disabled:opacity-50">
+                                無料で登録する
+                            </button>
+                            <p class="text-xs text-gray-500 text-center">
+                                配信解除はいつでも可能です。メールアドレスは配信以外の目的には使用しません。詳しくは<a href="/privacy.html" class="underline hover:text-brand-accent">プライバシーポリシー</a>をご覧ください。
+                            </p>
+                            <p id="newsletter-message" class="text-sm text-center" role="status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= ジャーナル ============================= -->
+            <section id="journal" class="py-20 md:py-32 bg-white fade-in-section">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 md:mb-24">
+                        <h2 class="text-3xl md:text-4xl">ジャーナル - Journal</h2>
+                        <p class="mt-4 text-sm text-gray-600 max-w-2xl mx-auto">身体をめぐる思索、理論の深掘り、そして実践の記録。</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <article class="bg-[#f9f9f7] p-6 rounded-lg border flex flex-col">
+                            <p class="text-xs text-brand-accent font-semibold mb-2">無料公開</p>
+                            <h3 class="text-xl font-semibold mb-3">「ゆるむ」とは何か - 脱力との決定的な違い</h3>
+                            <p class="text-sm text-gray-600 mb-4 flex-grow">多くの人が誤解する「ゆるむ」という概念。支持性を失わずに不必要な力みだけを手放す、その具体的な感覚と実践方法について。</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="#article-yurumu" class="text-brand-accent text-sm font-semibold hover:underline">続きを読む →</a>
+                            </div>
+                        </article>
+                        <article class="bg-[#f9f9f7] p-6 rounded-lg border flex flex-col">
+                            <p class="text-xs text-gray-500 font-semibold mb-2">会員限定</p>
+                            <h3 class="text-xl font-semibold mb-3">思考の暴走を止める、もう一つのアプローチ</h3>
+                            <p class="text-sm text-gray-600 mb-4 flex-grow">なぜ心理アプローチだけでは不十分なのか。身体性不合理という観点から、思考の反芻が生まれる根本メカニズムを解説します。</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="#pricing" class="nav-link text-brand-accent text-sm font-semibold hover:underline">会員登録して読む →</a>
+                            </div>
+                        </article>
+                        <article class="bg-[#f9f9f7] p-6 rounded-lg border flex flex-col">
+                            <p class="text-xs text-gray-500 font-semibold mb-2">会員限定</p>
+                            <h3 class="text-xl font-semibold mb-3">実践記録：クライアントAの変化</h3>
+                            <p class="text-sm text-gray-600 mb-4 flex-grow">長年の肩こりと不安感に悩まされていたクライアントが、「さする」と「ゆする」の実践を通じて、どのように自己調整能力を取り戻していったかの記録。</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200">
+                                <a href="#pricing" class="nav-link text-brand-accent text-sm font-semibold hover:underline">会員登録して読む →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= プラン ============================= -->
+            <section id="pricing" class="py-20 md:py-32 fade-in-section">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16 md:mb-24">
+                        <h2 class="text-3xl md:text-4xl">プラン - Plans</h2>
+                        <p class="mt-4 text-sm text-gray-600 max-w-2xl mx-auto">まずは無料から。あなたの探求の深さに合わせて、いつでも移動できます。表示価格はすべて税込です。</p>
+                    </div>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto items-stretch">
+
+                        <!-- 無料 -->
+                        <div class="border rounded-lg p-8 flex flex-col bg-white">
+                            <h3 class="text-2xl font-semibold">無料会員</h3>
+                            <p class="text-brand-accent mb-4 italic text-sm">まず、触れてみる。</p>
+                            <p class="text-4xl font-bold mb-1">¥0</p>
+                            <hr class="my-6">
+                            <ul class="space-y-3 mb-8 flex-grow text-sm">
+                                <li>✔︎ ニュースレターの配信</li>
+                                <li>✔︎ 公開ジャーナルの閲覧</li>
+                            </ul>
+                            <a href="#newsletter" class="nav-link mt-auto w-full block text-center bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300 transition-colors">
+                                無料で登録する
+                            </a>
+                        </div>
+
+                        <!-- The Library -->
+                        <div class="border rounded-lg p-8 flex flex-col bg-white">
+                            <h3 class="text-2xl font-semibold">The Library</h3>
+                            <p class="text-brand-accent mb-4 italic text-sm">個として存在する時間。自己との対話、その始まり。</p>
+                            <p class="text-4xl font-bold mb-1">¥3,300<span class="text-lg font-normal"> / 月</span></p>
+                            <hr class="my-6">
+                            <ul class="space-y-3 mb-8 flex-grow text-sm">
+                                <li>✔︎ 無料会員の全内容</li>
+                                <li>✔︎ オンライン自習コンテンツへのフルアクセス<br><span class="text-gray-500">（大沼水曜会、身体動態瞑想会 ほか）</span></li>
+                                <li>✔︎ 会員限定ジャーナルの閲覧</li>
+                                <li>✔︎ 配信内での質問回答（内容により選定）</li>
+                            </ul>
+                            <button type="button" data-plan="library" class="plan-button mt-auto w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300 transition-colors">
+                                このプランに申し込む
+                            </button>
+                        </div>
+
+                        <!-- The Collective -->
+                        <div class="border-2 border-brand-accent rounded-lg p-8 flex flex-col bg-white relative">
+                            <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-brand-accent text-white px-4 py-1 text-sm rounded-full whitespace-nowrap">おすすめ</div>
+                            <h3 class="text-2xl font-semibold">The Collective</h3>
+                            <p class="text-brand-accent mb-4 italic text-sm">他者との関わりを通して、自己を知る。</p>
+                            <p class="text-4xl font-bold mb-1">¥9,900<span class="text-lg font-normal"> / 月</span></p>
+                            <hr class="my-6">
+                            <ul class="space-y-3 mb-8 flex-grow text-sm">
+                                <li>✔︎ The Libraryの全内容</li>
+                                <li>✔︎ 月1回のグループカウンセリング（オンライン）</li>
+                            </ul>
+                            <button type="button" data-plan="collective" class="plan-button mt-auto w-full bg-brand-accent text-white px-6 py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">
+                                このプランに申し込む
+                            </button>
+                        </div>
+
+                        <!-- The Essential -->
+                        <div class="border rounded-lg p-8 flex flex-col bg-white">
+                            <h3 class="text-2xl font-semibold">The Essential</h3>
+                            <p class="text-brand-accent mb-4 italic text-sm">専門家との対話による、的確な調律。</p>
+                            <p class="text-4xl font-bold mb-1">¥33,000<span class="text-lg font-normal"> / 月</span></p>
+                            <hr class="my-6">
+                            <ul class="space-y-3 mb-8 flex-grow text-sm">
+                                <li>✔︎ The Collectiveの全内容</li>
+                                <li>✔︎ 月1回の個人カウンセリング（オンライン）</li>
+                            </ul>
+                            <button type="button" data-plan="essential" class="plan-button mt-auto w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-md font-medium hover:bg-gray-300 transition-colors">
+                                このプランに申し込む
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-center text-xs text-gray-500 mt-10 max-w-2xl mx-auto">
+                        お支払い・解約の条件については<a href="/tokushoho.html" class="underline hover:text-brand-accent">特定商取引法に基づく表記</a>をご確認ください。
+                    </p>
+                </div>
+            </section>
+
+            <!-- ============================= FAQ ============================= -->
+            <section id="faq" class="py-20 md:py-32 bg-white fade-in-section">
+                <div class="container mx-auto px-6 max-w-3xl">
+                    <div class="text-center mb-12 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl">よくある質問</h2>
+                    </div>
+                    <div class="divide-y border-t border-b">
+                        <details class="group py-5">
+                            <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                                <span>運動が苦手でも大丈夫ですか？</span>
+                                <span class="text-brand-accent ml-4 shrink-0 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-base leading-loose text-gray-700">問題ありません。「さする」「ゆする」といった動きが中心で、筋力や柔軟性は必要ありません。椅子に座ったままでも、横になったままでも行えます。</p>
+                        </details>
+                        <details class="group py-5">
+                            <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                                <span>どのくらいの時間が必要ですか？</span>
+                                <span class="text-brand-accent ml-4 shrink-0 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-base leading-loose text-gray-700">1日数分からでも始められます。配信やアーカイブは好きな時間に視聴できるため、ご自身のペースで進めていただけます。</p>
+                        </details>
+                        <details class="group py-5">
+                            <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                                <span>途中でプランを変えたり、やめたりできますか？</span>
+                                <span class="text-brand-accent ml-4 shrink-0 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-base leading-loose text-gray-700">はい。プランの変更・解約はいつでも可能です。手続きの詳細と適用のタイミングは<a href="/tokushoho.html" class="underline text-brand-accent">特定商取引法に基づく表記</a>に記載しています。</p>
+                        </details>
+                        <details class="group py-5">
+                            <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                                <span>これは医療行為や治療ですか？</span>
+                                <span class="text-brand-accent ml-4 shrink-0 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-base leading-loose text-gray-700">いいえ。somaticstudioが提供するのは教育・自己探求のためのコンテンツであり、医療行為・診断・治療ではありません。痛みや症状が続く場合は、まず医療機関にご相談ください。</p>
+                        </details>
+                        <details class="group py-5">
+                            <summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-lg">
+                                <span>いきなり有料に申し込むのが不安です。</span>
+                                <span class="text-brand-accent ml-4 shrink-0 group-open:rotate-45 transition-transform text-2xl leading-none">+</span>
+                            </summary>
+                            <p class="mt-4 text-base leading-loose text-gray-700">無料のニュースレターと公開ジャーナルから始めてください。考え方や語り口が自分に合うかを確かめたうえで、必要になったときにプランを選んでいただければ十分です。</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= 主宰者について ============================= -->
+            <section id="about" class="py-20 md:py-32 fade-in-section">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="grid md:grid-cols-3 gap-12 items-center">
+                        <div class="md:col-span-1">
+                            <!-- TODO: 本人写真に差し替える（最優先） -->
+                            <div class="visual-placeholder rounded-lg w-full aspect-[4/5] flex items-center justify-center" role="img" aria-label="大沼竜也">
+                                <span class="text-4xl tracking-widest text-[#5a6e5a]/70" style="font-family:'Noto Serif JP',serif;">大沼</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <h2 class="text-3xl md:text-4xl mb-6">主宰者について</h2>
+                            <div class="prose prose-custom max-w-none text-lg leading-loose">
+                                <p class="font-semibold text-xl">大沼 竜也</p>
+                                <p>somaticstudio主宰。身体探求者。自らの長年の不調と向き合う中で、従来の心身アプローチの限界を痛感。その探求は、古今東西の哲学、最新の認知科学、そして何よりも自らの身体との対話へと向かった。</p>
+                                <p>数多の試行錯誤の末、身体を土台として心身の統合を図る独自理論「適応的身体基盤」を構築。現在は、個々のクライアントが自らの内に眠る「身体知」を発見し、豊かな人生を創造するためのサポートを行っている。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================= コンタクト ============================= -->
+            <section id="contact" class="py-20 md:py-32 bg-white fade-in-section">
+                <div class="container mx-auto px-6 max-w-2xl">
+                    <div class="text-center">
+                        <h2 class="text-3xl md:text-4xl mb-6">コンタクト</h2>
+                        <p class="mb-12">個人セッション、ワークショップ、その他のお問い合わせは、以下のフォームよりご連絡ください。身体という、最も身近な未開の地を探検する旅でお会いできることを楽しみにしています。</p>
+                    </div>
+                    <form id="contact-form" class="text-left space-y-6" novalidate>
+                        <div>
+                            <label for="contact-name" class="block text-sm font-medium">お名前</label>
+                            <input type="text" id="contact-name" name="name" required autocomplete="name" maxlength="100"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-sm font-medium">メールアドレス</label>
+                            <input type="email" id="contact-email" name="email" required autocomplete="email" maxlength="200"
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-sm font-medium">お問い合わせ内容</label>
+                            <textarea id="contact-message" name="message" rows="5" required maxlength="4000"
+                                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></textarea>
+                        </div>
+                        <p class="text-xs text-gray-500">
+                            送信により<a href="/privacy.html" class="underline hover:text-brand-accent">プライバシーポリシー</a>に同意したものとみなします。
+                        </p>
+                        <div>
+                            <button type="submit" id="contact-submit"
+                                    class="w-full bg-brand-accent text-white px-6 py-3 rounded-md text-base font-medium hover:bg-opacity-80 transition-colors disabled:opacity-50">
+                                送信する
+                            </button>
+                        </div>
+                        <p id="contact-message-status" class="text-sm text-center" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </section>
         </main>
     </div>
 
-    <!-- Auth Page -->
-    <div id="auth-page" class="page-section min-h-screen flex items-center justify-center py-24 px-6"><!-- Content from previous version --><div class="max-w-md w-full bg-white p-8 md:p-12 rounded-lg shadow-lg"><div id="auth-container"><div id="login-form"><h2 class="text-3xl mb-2 text-center">ログイン</h2><p class="text-center text-sm text-gray-600 mb-8">会員の方はこちらからログインしてください。</p><form id="login" class="space-y-6"><div><label for="login-email" class="block text-sm font-medium">メールアドレス</label><input type="email" id="login-email" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><div><label for="login-password" class="block text-sm font-medium">パスワード</label><input type="password" id="login-password" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><button type="submit" class="w-full bg-brand-accent text-white py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">ログイン</button></form><p class="text-center text-sm mt-6">アカウントをお持ちでないですか？ <a href="#" id="show-signup" class="text-brand-accent hover:underline">新規登録</a></p></div><div id="signup-form" class="hidden"><h2 class="text-3xl mb-2 text-center">新規会員登録</h2><p class="text-center text-sm text-gray-600 mb-8">somaticstudioの世界へようこそ。</p><form id="signup" class="space-y-6"><div><label for="signup-email" class="block text-sm font-medium">メールアドレス</label><input type="email" id="signup-email" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><div><label for="signup-password" class="block text-sm font-medium">パスワード</label><input type="password" id="signup-password" required class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition"></div><button type="submit" class="w-full bg-brand-accent text-white py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">登録する</button></form><p class="text-center text-sm mt-6">すでにアカウントをお持ちですか？ <a href="#" id="show-login" class="text-brand-accent hover:underline">ログイン</a></p></div><p id="auth-error" class="text-red-500 text-sm mt-4 text-center"></p></div></div></div>
+    <!-- ============================= 記事ページ（無料公開） ============================= -->
+    <div id="article-page" class="page-section min-h-screen py-32 px-6">
+        <article class="container mx-auto max-w-2xl">
+            <p class="text-xs text-brand-accent font-semibold mb-3">無料公開</p>
+            <h1 class="text-3xl md:text-4xl leading-snug mb-8">「ゆるむ」とは何か - 脱力との決定的な違い</h1>
+            <div class="prose prose-custom max-w-none text-lg leading-loose space-y-6">
+                <p>「力を抜いてください」と言われて、その通りにできる人はほとんどいません。多くの場合、起きるのは二つのうちどちらかです。抜いたつもりで抜けていないか、あるいは支えまで手放して、身体が崩れてしまうか。</p>
+                <p>somaticstudioが扱う『ゆるむ』は、そのどちらでもありません。<strong>身体を支える働きは保ったまま、支えに使われていない余分な緊張だけを手放す</strong>こと。これが脱力との決定的な違いです。</p>
 
-    <!-- Member Dashboard Page (Updated) -->
+                <h2 class="text-2xl mt-12 mb-4">なぜ「抜こう」とすると失敗するのか</h2>
+                <p>力みは、多くの場合、意識してつくったものではありません。過去のどこかで必要だった防御が、そのまま固定化して残っているものです。意識してつくっていないものを、意識で解除しようとしても届きません。「抜こう」と力むことで、かえって緊張が増えることさえあります。</p>
+                <p>だから手がかりにするのは、命令ではなく<strong>感覚</strong>です。快か、不快か。その一点だけを見ていきます。</p>
+
+                <h2 class="text-2xl mt-12 mb-4">今日、試せること</h2>
+                <p>特別な準備は要りません。椅子に座ったままで構いません。</p>
+                <ol class="list-decimal pl-6 space-y-3">
+                    <li>片方の前腕を、もう片方の手で、ゆっくり<strong>さすり</strong>ます。強さは、気持ちがいいと感じる範囲で。目的は揉みほぐすことではなく、そこに腕があると気づくことです。</li>
+                    <li>30秒ほど続けたら手を止め、両腕の感じを比べます。重さ、温度、輪郭のはっきりさ。左右で違いがあれば、それが『差異を知覚する』ということです。</li>
+                    <li>次に、肩を小さく<strong>ゆすり</strong>ます。大きく回すのではなく、揺らぎが自然に続く程度の小ささで。心地よさが途切れたら、そこでやめます。</li>
+                </ol>
+                <p>うまくできたかどうかを判定する必要はありません。違いに気づけたなら、それで十分です。この「気づける」という状態そのものが、『ゆるむ』の入り口にあたります。</p>
+
+                <h2 class="text-2xl mt-12 mb-4">ここから先へ</h2>
+                <p>『ゆるむ』は、適応的身体基盤を構成する三つの能力の、最初の土台です。この上に『組織分化』と『差異を知覚する』能力が積み上がっていきます。</p>
+                <p>続きは、無料のニュースレターでお届けしています。</p>
+            </div>
+
+            <div class="mt-16 p-8 bg-white border border-brand-accent rounded-lg text-center">
+                <h2 class="text-2xl mb-4">続きを、無料で受け取る</h2>
+                <p class="text-base mb-6">身体をめぐる思索と、今日から試せる小さな実践を不定期でお届けします。</p>
+                <a href="/#newsletter" class="inline-block bg-brand-accent text-white px-10 py-3 rounded-full text-sm font-medium hover:bg-opacity-80 transition-colors">ニュースレターに登録する</a>
+            </div>
+
+            <p class="mt-12 text-center">
+                <a href="/#journal" class="text-brand-accent text-sm hover:underline">← ジャーナル一覧へ戻る</a>
+            </p>
+        </article>
+    </div>
+
+    <!-- ============================= 認証ページ ============================= -->
+    <div id="auth-page" class="page-section min-h-screen flex items-center justify-center py-24 px-6">
+        <div class="max-w-md w-full bg-white p-8 md:p-12 rounded-lg shadow-lg">
+            <div id="auth-container">
+                <div id="login-form-wrapper">
+                    <h2 class="text-3xl mb-2 text-center">ログイン</h2>
+                    <p class="text-center text-sm text-gray-600 mb-8">会員の方はこちらからログインしてください。</p>
+                    <form id="login" class="space-y-6" novalidate>
+                        <div>
+                            <label for="login-email" class="block text-sm font-medium">メールアドレス</label>
+                            <input type="email" id="login-email" required autocomplete="email"
+                                   class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                        </div>
+                        <div>
+                            <label for="login-password" class="block text-sm font-medium">パスワード</label>
+                            <input type="password" id="login-password" required autocomplete="current-password"
+                                   class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                        </div>
+                        <button type="submit" class="w-full bg-brand-accent text-white py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">ログイン</button>
+                    </form>
+                    <p class="text-center text-sm mt-6">アカウントをお持ちでないですか？ <a href="#" id="show-signup" class="text-brand-accent hover:underline">新規登録</a></p>
+                </div>
+
+                <div id="signup-form-wrapper" class="hidden">
+                    <h2 class="text-3xl mb-2 text-center">新規会員登録</h2>
+                    <p class="text-center text-sm text-gray-600 mb-6">somaticstudioの世界へようこそ。</p>
+                    <p id="signup-plan-note" class="hidden text-sm text-center bg-[#f9f9f7] border rounded-md px-4 py-3 mb-6"></p>
+                    <form id="signup" class="space-y-6" novalidate>
+                        <div>
+                            <label for="signup-email" class="block text-sm font-medium">メールアドレス</label>
+                            <input type="email" id="signup-email" required autocomplete="email"
+                                   class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                        </div>
+                        <div>
+                            <label for="signup-password" class="block text-sm font-medium">パスワード</label>
+                            <input type="password" id="signup-password" required autocomplete="new-password" minlength="6"
+                                   class="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-brand-accent focus:border-brand-accent transition">
+                            <p class="text-xs text-gray-500 mt-1">6文字以上で設定してください。</p>
+                        </div>
+                        <p class="text-xs text-gray-500">
+                            登録により<a href="/terms.html" class="underline hover:text-brand-accent">利用規約</a>および<a href="/privacy.html" class="underline hover:text-brand-accent">プライバシーポリシー</a>に同意したものとみなします。
+                        </p>
+                        <button type="submit" class="w-full bg-brand-accent text-white py-3 rounded-md font-medium hover:bg-opacity-80 transition-colors">登録する</button>
+                    </form>
+                    <p class="text-center text-sm mt-6">すでにアカウントをお持ちですか？ <a href="#" id="show-login" class="text-brand-accent hover:underline">ログイン</a></p>
+                </div>
+
+                <p id="auth-error" class="text-red-600 text-sm mt-4 text-center" role="alert" aria-live="assertive"></p>
+                <p class="text-center text-sm mt-6"><a href="/" class="text-gray-500 hover:underline">← トップページへ戻る</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================= マイページ ============================= -->
     <div id="dashboard-page" class="page-section min-h-screen py-32 px-6">
         <div class="container mx-auto max-w-5xl">
             <div class="text-center mb-12">
@@ -129,31 +656,70 @@
                 <p class="mt-4 text-gray-600">ようこそ、<span id="user-email-dashboard" class="font-semibold"></span>さん。</p>
                 <p class="mt-2 text-sm">現在のプラン: <span id="user-plan" class="font-semibold text-brand-accent"></span></p>
             </div>
-            
-            <div class="bg-white p-8 md:p-12 rounded-lg shadow-lg">
-                <!-- Library Content Section -->
-                <div id="library-content">
-                    <h2 class="text-2xl mb-8 border-b pb-4">ライブラリーコンテンツ</h2>
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <article><img src="https://placehold.co/600x400/5a6e5a/ffffff?text=大沼水曜会" class="rounded-lg mb-4 w-full"><h3 class="text-xl font-semibold mb-2">大沼水曜会 (配信・アーカイブ)</h3><p class="text-sm text-gray-600">毎週水曜に行われるライブ配信と、過去の全アーカイブを視聴できます。</p></article>
-                        <article><img src="https://placehold.co/600x400/333333/ffffff?text=身体動態瞑想会" class="rounded-lg mb-4 w-full"><h3 class="text-xl font-semibold mb-2">身体動態瞑想会 (配信・アーカイブ)</h3><p class="text-sm text-gray-600">ガイド付きの瞑想セッション。ライブ参加とアーカイブ視聴が可能です。</p></article>
-                    </div>
-                </div>
 
-                <!-- Session Booking Section (Dynamically shown) -->
+            <div class="bg-white p-8 md:p-12 rounded-lg shadow-lg">
+                <!-- プラン申し込み / アップグレード -->
+                <div id="upgrade-area" class="mb-12"></div>
+
+                <!-- ライブラリーコンテンツ -->
+                <div id="library-content"></div>
+
+                <!-- セッション予約 -->
                 <div id="session-booking" class="mt-12"></div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white"><!-- Content from previous version --><div class="container mx-auto px-6 py-12 text-center text-sm"><p>&copy; 2025 somaticstudio. All Rights Reserved.</p><nav class="mt-6 space-x-6"><a href="#philosophy" class="nav-link hover:text-gray-300 transition-colors">理論</a><a href="#practice" class="nav-link hover:text-gray-300 transition-colors">実践</a><a href="#about" class="nav-link hover:text-gray-300 transition-colors">主宰者について</a><a href="#contact" class="nav-link hover:text-gray-300 transition-colors">コンタクト</a></nav></div></footer>
+    <!-- ============================= Footer ============================= -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-12 text-center text-sm">
+            <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3" aria-label="フッターナビゲーション">
+                <a href="/#philosophy" class="hover:text-gray-300 transition-colors">理論</a>
+                <a href="/#practice" class="hover:text-gray-300 transition-colors">実践</a>
+                <a href="/#newsletter" class="hover:text-gray-300 transition-colors">ニュースレター</a>
+                <a href="/#pricing" class="hover:text-gray-300 transition-colors">プラン</a>
+                <a href="/#faq" class="hover:text-gray-300 transition-colors">よくある質問</a>
+                <a href="/#about" class="hover:text-gray-300 transition-colors">主宰者について</a>
+                <a href="/#contact" class="hover:text-gray-300 transition-colors">コンタクト</a>
+            </nav>
+            <nav class="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-gray-400" aria-label="規約類">
+                <a href="/terms.html" class="hover:text-white transition-colors">利用規約</a>
+                <a href="/privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
+                <a href="/tokushoho.html" class="hover:text-white transition-colors">特定商取引法に基づく表記</a>
+            </nav>
+            <p class="text-gray-400 text-xs mb-4 max-w-2xl mx-auto leading-relaxed">
+                somaticstudioが提供するのは教育・自己探求のためのコンテンツであり、医療行為・診断・治療ではありません。
+            </p>
+            <p>&copy; 2025 somaticstudio. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-    <!-- Firebase SDK -->
+    <!-- ============================= Scripts ============================= -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        /* =========================================================================
+           要設定：ここを埋めるまで、有料プランの決済は開始されません。
+           checkoutUrls に Square / Stripe のサブスクリプション決済リンクを入れると、
+           「このプランに申し込む」からそのまま決済画面へ進めるようになります。
+           空のままの場合は、申込み希望としてお問い合わせ経由で受け付けます。
+           newsletterUrl は、外部の配信サービス（note / Substack 等）を使う場合に設定。
+           ========================================================================= */
+        const SITE_CONFIG = {
+            checkoutUrls: {
+                library:    '',
+                collective: '',
+                essential:  ''
+            },
+            newsletterUrl: ''
+        };
+
+        const PLANS = {
+            free:       { name: '無料会員',       rank: 0, price: '¥0' },
+            library:    { name: 'The Library',    rank: 1, price: '¥3,300 / 月・税込' },
+            collective: { name: 'The Collective', rank: 2, price: '¥9,900 / 月・税込' },
+            essential:  { name: 'The Essential',  rank: 3, price: '¥33,000 / 月・税込' }
+        };
+
+        const PENDING_PLAN_KEY = 'somaticstudio:pendingPlan';
 
         const firebaseConfig = {
             apiKey: "AIzaSyCOcfOKuyZklvFTZ9t16JYZsqb2QNRPQYU",
@@ -164,230 +730,595 @@
             appId: "1:932574808861:web:8bf5b3bdc8d631a8e52ff4",
             measurementId: "G-34V43FRWKC"
         };
-        
-        try {
-            const config = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : firebaseConfig;
-            const app = initializeApp(config);
-            const auth = getAuth(app);
-            const db = getFirestore(app);
 
-            const mainContent = document.getElementById('main-content');
-            const authPage = document.getElementById('auth-page');
-            const dashboardPage = document.getElementById('dashboard-page');
-            const authLinks = document.getElementById('auth-links');
-            const loginForm = document.getElementById('login');
-            const signupForm = document.getElementById('signup');
-            const authError = document.getElementById('auth-error');
-            const showSignupBtn = document.getElementById('show-signup');
-            const showLoginBtn = document.getElementById('show-login');
-            const homeLink = document.getElementById('home-link');
-            const sessionBookingContainer = document.getElementById('session-booking');
+        // Firebaseの読み込みに成功したら差し替わる。読み込み前・失敗時はnullのまま。
+        let auth = null;
+        let db = null;
+        let firebaseReady = false;
+        let authResolved = false;
+        let FB = {};   // Firebase SDKの関数群
 
-            const showPage = (pageId) => {
-                mainContent.classList.add('hidden');
-                authPage.classList.remove('active');
-                dashboardPage.classList.remove('active');
-                
-                if (pageId === 'main') mainContent.classList.remove('hidden');
-                else if (pageId === 'auth') authPage.classList.add('active');
-                else if (pageId === 'dashboard') dashboardPage.classList.add('active');
-                
-                window.scrollTo(0, 0);
-            };
-            
-            homeLink.addEventListener('click', (e) => { e.preventDefault(); showPage('main'); });
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (mainContent.classList.contains('hidden')) {
-                        showPage('main');
-                        setTimeout(() => {
-                            const targetId = e.target.getAttribute('href');
-                            document.querySelector(targetId)?.scrollIntoView();
-                        }, 100);
-                    }
-                });
-            });
+        let currentUser = null;
+        let currentPlan = 'free';
 
-            document.querySelectorAll('.plan-button, .auth-required').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showPage('auth');
-                });
-            });
+        /* =========================================================================
+           ここから下は、Firebaseの読み込み結果に関係なく動く部分。
+           （メニュー、ページ遷移、スクロール演出など）
+           ========================================================================= */
+        const mainContent   = document.getElementById('main-content');
+        const authPage      = document.getElementById('auth-page');
+        const dashboardPage = document.getElementById('dashboard-page');
+        const articlePage   = document.getElementById('article-page');
+        const authError     = document.getElementById('auth-error');
 
-            showSignupBtn.addEventListener('click', (e) => { e.preventDefault(); toggleAuthForms(true); });
-            showLoginBtn.addEventListener('click', (e) => { e.preventDefault(); toggleAuthForms(false); });
+        const PAGE_ROUTES = {
+            '#login':          'auth',
+            '#signup':         'auth',
+            '#mypage':         'dashboard',
+            '#article-yurumu': 'article'
+        };
 
-            function toggleAuthForms(showSignup) {
-                document.getElementById('login-form').classList.toggle('hidden', showSignup);
-                document.getElementById('signup-form').classList.toggle('hidden', !showSignup);
-                authError.textContent = '';
-            }
-
-            onAuthStateChanged(auth, async (user) => {
-                if (user) {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    // Firestoreにドキュメントがない場合、デフォルトで 'library' プランを割り当てる
-                    const userData = userDoc.exists() ? userDoc.data() : { plan: 'library' };
-                    updateUIForUser(user, userData);
-                } else {
-                    updateUIForGuest();
-                }
-            });
-
-            function updateUIForUser(user, userData) {
-                authLinks.innerHTML = `
-                    <button id="dashboard-btn" class="hover:text-brand-accent transition-colors">マイページ</button>
-                    <button id="logout-btn" class="bg-brand-accent text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-opacity-80 transition-colors">ログアウト</button>
-                `;
-                document.getElementById('logout-btn').addEventListener('click', handleLogout);
-                document.getElementById('dashboard-btn').addEventListener('click', () => showPage('dashboard'));
-
-                document.getElementById('user-email-dashboard').textContent = user.email;
-                document.getElementById('user-plan').textContent = getPlanName(userData.plan);
-
-                updateDashboardContent(userData.plan);
-            }
-
-            function updateUIForGuest() {
-                 authLinks.innerHTML = `<button id="login-btn" class="bg-brand-accent text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-opacity-80 transition-colors">ログイン / 会員登録</button>`;
-                 document.getElementById('login-btn').addEventListener('click', () => showPage('auth'));
-                 if(!mainContent.classList.contains('hidden')) return;
-                 showPage('main');
-            }
-            
-            function getPlanName(planId) {
-                if (planId === 'essential') return 'The Essential';
-                if (planId === 'collective') return 'The Collective';
-                return 'The Library'; // Default
-            }
-            
-            function updateDashboardContent(plan) {
-                sessionBookingContainer.innerHTML = ''; // Clear previous content
-                let bookingHTML = '';
-
-                if (plan === 'collective' || plan === 'essential') {
-                    bookingHTML += `
-                        <h2 class="text-2xl mb-8 border-b pb-4">セッション予約</h2>
-                        <div class="bg-gray-50 p-6 rounded-lg mb-6">
-                            <h3 class="text-xl font-semibold mb-4">グループカウンセリング</h3>
-                            <p class="text-sm text-gray-600 mb-4">月1回のグループセッションにご参加いただけます。以下の手順でご予約ください。</p>
-                            <ol class="list-decimal list-inside text-sm space-y-2">
-                                <li>下のボタンからSquareでご希望の日時を予約します。</li>
-                                <li>予約後、こちらの<a href="https://forms.gle/cQUFbUtoByNqLKLP6" target="_blank" rel="noopener noreferrer" class="text-brand-accent underline">フォーム</a>に必要事項をご記入ください。</li>
-                                <li>当日は、予約時間にZoomへご入室ください。</li>
-                            </ol>
-                            <div class="mt-4 text-xs bg-gray-100 p-3 rounded">
-                                <strong>Zoom情報:</strong><br>
-                                ミーティング ID: 845 0410 4919<br>
-                                パスコード: 220117
-                            </div>
-                            <a href="https://app.squareup.com/appointments/book/classes/mlm1yevf1urskb/MMQ0KFT5CAMRZ/classes" target="_blank" rel="noopener noreferrer" class="inline-block mt-6 bg-brand-accent text-white px-8 py-2 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
-                                グループセッションを予約する
-                            </a>
-                        </div>
-                    `;
-                }
-
-                if (plan === 'essential') {
-                     bookingHTML += `
-                        <div class="bg-gray-50 p-6 rounded-lg">
-                            <h3 class="text-xl font-semibold mb-4">個人カウンセリング</h3>
-                            <p class="text-sm text-gray-600 mb-4">月1回の個人セッションにご参加いただけます。以下の手順でご予約ください。</p>
-                            <ol class="list-decimal list-inside text-sm space-y-2">
-                                <li>下のボタンからSquareでご希望の日時を予約します。</li>
-                                <li>当日は、予約時間にZoomへご入室ください。</li>
-                            </ol>
-                             <div class="mt-4 text-xs bg-gray-100 p-3 rounded">
-                                <strong>Zoom情報:</strong><br>
-                                ミーティング ID: 681 112 1798<br>
-                                パスコード: 0000
-                            </div>
-                            <a href="https://book.squareup.com/appointments/mlm1yevf1urskb/location/MMQ0KFT5CAMRZ/services/RF3HMIXD4X2B4SKZRAJXTLKB" target="_blank" rel="noopener noreferrer" class="inline-block mt-6 bg-brand-accent text-white px-8 py-2 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
-                                個人セッションを予約する
-                            </a>
-                        </div>
-                    `;
-                }
-
-                if (bookingHTML !== '') {
-                    sessionBookingContainer.innerHTML = bookingHTML;
-                }
-            }
-
-            const handleSignUp = async (e) => {
-                e.preventDefault();
-                const email = signupForm['signup-email'].value;
-                const password = signupForm['signup-password'].value;
-                try {
-                    const cred = await createUserWithEmailAndPassword(auth, email, password);
-                    // Create a user document in Firestore with the default free plan
-                    await setDoc(doc(db, "users", cred.user.uid), {
-                        email: cred.user.email,
-                        plan: 'library', // 新規登録時はデフォルトでLibraryプラン
-                        createdAt: new Date()
-                    });
-                    signupForm.reset();
-                } catch (err) {
-                    authError.textContent = getAuthErrorMessage(err.code);
-                }
-            };
-
-            const handleLogin = async (e) => {
-                e.preventDefault();
-                const email = loginForm['login-email'].value;
-                const password = loginForm['login-password'].value;
-                try {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    loginForm.reset();
-                } catch (err) {
-                    authError.textContent = getAuthErrorMessage(err.code);
-                }
-            };
-
-            const handleLogout = () => {
-                signOut(auth).catch(err => console.error(err));
-            };
-            
-            function getAuthErrorMessage(code) {
-                switch (code) {
-                    case 'auth/weak-password': return 'パスワードは6文字以上で入力してください。';
-                    case 'auth/email-already-in-use': return 'このメールアドレスは既に使用されています。';
-                    case 'auth/invalid-email': return '有効なメールアドレスを入力してください。';
-                    case 'auth/user-not-found':
-                    case 'auth/wrong-password':
-                    case 'auth/invalid-credential':
-                        return 'メールアドレスまたはパスワードが間違っています。';
-                    default:
-                        return 'エラーが発生しました。しばらくしてから再度お試しください。';
-                }
-            }
-
-            signupForm.addEventListener('submit', handleSignUp);
-            loginForm.addEventListener('submit', handleLogin);
-            
-        } catch (e) {
-            console.error("Firebase initialization failed:", e);
-            document.getElementById('auth-links').innerHTML = `<span class="text-red-500 text-xs">機能の読み込みに失敗</span>`;
+        function showPage(pageId, { scrollToTop = true } = {}) {
+            mainContent.classList.toggle('hidden', pageId !== 'main');
+            authPage.classList.toggle('active', pageId === 'auth');
+            dashboardPage.classList.toggle('active', pageId === 'dashboard');
+            articlePage.classList.toggle('active', pageId === 'article');
+            if (scrollToTop) window.scrollTo(0, 0);
         }
-        
-        const sections = document.querySelectorAll('.fade-in-section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
+
+        function renderPendingPlanNote() {
+            const note = document.getElementById('signup-plan-note');
+            const pending = sessionStorage.getItem(PENDING_PLAN_KEY);
+            if (pending && PLANS[pending]) {
+                note.textContent = `${PLANS[pending].name} をご希望ですね。まずアカウントを作成すると、次の画面でお申し込み手続きに進めます。`;
+                note.classList.remove('hidden');
+            } else {
+                note.classList.add('hidden');
+            }
+        }
+
+        function toggleAuthForms(showSignup) {
+            document.getElementById('login-form-wrapper').classList.toggle('hidden', showSignup);
+            document.getElementById('signup-form-wrapper').classList.toggle('hidden', !showSignup);
+            authError.textContent = '';
+            renderPendingPlanNote();
+        }
+
+        function handleRoute() {
+            const hash = window.location.hash;
+            const page = PAGE_ROUTES[hash];
+
+            // 認証状態が確定する前は判断を保留し、確定後に onAuthStateChanged 側で振り分ける
+            if (page === 'dashboard' && authResolved && !currentUser) {
+                window.location.hash = '#login';
+                return;
+            }
+
+            if (page) {
+                showPage(page);
+                if (hash === '#signup') toggleAuthForms(true);
+                if (hash === '#login')  toggleAuthForms(false);
+                return;
+            }
+
+            showPage('main', { scrollToTop: false });
+            if (hash && hash.length > 1) {
+                const target = document.querySelector(hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    return;
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('hashchange', handleRoute);
+
+        // ログイン / 新規登録フォームの切り替え
+        document.getElementById('show-signup').addEventListener('click', (e) => { e.preventDefault(); toggleAuthForms(true); });
+        document.getElementById('show-login').addEventListener('click',  (e) => { e.preventDefault(); toggleAuthForms(false); });
+
+        document.getElementById('home-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMobileMenu();
+            if (window.location.hash) {
+                window.location.hash = '';
+            } else {
+                showPage('main');
+            }
+        });
+
+        // ページ内アンカーへの移動。別ページ表示中でもトップに戻ってからスクロールする。
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a.nav-link');
+            if (!link) return;
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+
+            e.preventDefault();
+            closeMobileMenu();
+
+            if (window.location.hash === href) {
+                handleRoute();
+            } else {
+                window.location.hash = href;
+            }
+        });
+
+        /* ---------------- モバイルメニュー ---------------- */
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen   = document.getElementById('icon-open');
+        const iconClose  = document.getElementById('icon-close');
+
+        function setMobileMenu(open) {
+            mobileMenu.classList.toggle('hidden', !open);
+            iconOpen.classList.toggle('hidden', open);
+            iconClose.classList.toggle('hidden', !open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+        }
+        function closeMobileMenu() { setMobileMenu(false); }
+
+        menuToggle.addEventListener('click', () => {
+            setMobileMenu(mobileMenu.classList.contains('hidden'));
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
+        });
+
+        /* ---------------- スクロール演出 ---------------- */
+        // スクリプトがここまで到達したときだけフェードインを有効にする
+        document.documentElement.classList.add('js');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
-        sections.forEach(section => { observer.observe(section); });
+        document.querySelectorAll('.fade-in-section').forEach((section) => observer.observe(section));
 
         const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        /* ---------------- プラン選択 ---------------- */
+        document.querySelectorAll('.plan-button').forEach((button) => {
+            button.addEventListener('click', () => {
+                const plan = button.dataset.plan;
+                if (plan) sessionStorage.setItem(PENDING_PLAN_KEY, plan);
+
+                gtag('event', 'select_plan', { plan_id: plan });
+
+                if (currentUser) {
+                    window.location.hash = '#mypage';
+                } else {
+                    window.location.hash = '#signup';
+                    toggleAuthForms(true);
+                }
+            });
         });
+
+        /* ---------------- ニュースレター登録 ---------------- */
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const input   = document.getElementById('newsletter-email');
+            const button  = document.getElementById('newsletter-submit');
+            const message = document.getElementById('newsletter-message');
+            const email   = input.value.trim();
+
+            message.className = 'text-sm text-center';
+
+            if (!input.checkValidity() || !email) {
+                message.textContent = '有効なメールアドレスを入力してください。';
+                message.classList.add('text-red-600');
+                input.focus();
+                return;
+            }
+
+            // 外部の配信サービスを使う場合はそちらへ引き渡す
+            if (SITE_CONFIG.newsletterUrl) {
+                gtag('event', 'newsletter_signup', { method: 'external' });
+                window.open(SITE_CONFIG.newsletterUrl, '_blank', 'noopener');
+                return;
+            }
+
+            if (!firebaseReady) {
+                message.textContent = '現在ご登録を受け付けられません。お手数ですが、お問い合わせフォームよりご連絡ください。';
+                message.classList.add('text-red-600');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = '送信中...';
+
+            try {
+                await FB.addDoc(FB.collection(db, 'newsletter_subscribers'), {
+                    email,
+                    createdAt: FB.serverTimestamp(),
+                    source: 'website'
+                });
+                gtag('event', 'newsletter_signup', { method: 'site' });
+                newsletterForm.reset();
+                message.textContent = 'ご登録ありがとうございます。次回の配信からお届けします。';
+                message.classList.add('text-brand-accent');
+            } catch (err) {
+                console.error('ニュースレター登録に失敗しました:', err);
+                message.textContent = '登録に失敗しました。時間をおいて再度お試しください。';
+                message.classList.add('text-red-600');
+            } finally {
+                button.disabled = false;
+                button.textContent = '無料で登録する';
+            }
+        });
+
+        /* ---------------- お問い合わせ ---------------- */
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const button = document.getElementById('contact-submit');
+            const status = document.getElementById('contact-message-status');
+            const name   = document.getElementById('contact-name').value.trim();
+            const email  = document.getElementById('contact-email').value.trim();
+            const body   = document.getElementById('contact-message').value.trim();
+
+            status.className = 'text-sm text-center';
+
+            if (!contactForm.checkValidity() || !name || !email || !body) {
+                status.textContent = 'すべての項目をご入力ください。';
+                status.classList.add('text-red-600');
+                return;
+            }
+
+            if (!firebaseReady) {
+                status.textContent = '現在送信できません。お手数ですが時間をおいて再度お試しください。';
+                status.classList.add('text-red-600');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = '送信中...';
+
+            try {
+                await FB.addDoc(FB.collection(db, 'contacts'), {
+                    name,
+                    email,
+                    message: body,
+                    createdAt: FB.serverTimestamp(),
+                    interestedPlan: sessionStorage.getItem(PENDING_PLAN_KEY) || null
+                });
+                gtag('event', 'contact_submit');
+                contactForm.reset();
+                status.textContent = 'お問い合わせを承りました。追ってご連絡いたします。';
+                status.classList.add('text-brand-accent');
+            } catch (err) {
+                console.error('お問い合わせの送信に失敗しました:', err);
+                status.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+                status.classList.add('text-red-600');
+            } finally {
+                button.disabled = false;
+                button.textContent = '送信する';
+            }
+        });
+
+        /* ---------------- マイページの各領域 ---------------- */
+        const authLinks       = document.getElementById('auth-links');
+        const authLinksMobile = document.getElementById('auth-links-mobile');
+
+        function renderAuthLinks(loggedIn) {
+            if (loggedIn) {
+                const html = `
+                    <a href="#mypage" class="hover:text-brand-accent transition-colors">マイページ</a>
+                    <button type="button" data-action="logout" class="bg-brand-accent text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-opacity-80 transition-colors">ログアウト</button>
+                `;
+                authLinks.innerHTML = html;
+                authLinksMobile.innerHTML = `<div class="flex items-center gap-4">${html}</div>`;
+            } else {
+                const html = `<a href="#login" class="inline-block bg-brand-accent text-white px-4 py-2 rounded-full text-xs font-medium hover:bg-opacity-80 transition-colors">ログイン / 会員登録</a>`;
+                authLinks.innerHTML = html;
+                authLinksMobile.innerHTML = html;
+            }
+
+            document.querySelectorAll('[data-action="logout"]').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    closeMobileMenu();
+                    FB.signOut(auth).catch((err) => console.error(err));
+                    window.location.hash = '';
+                });
+            });
+            document.querySelectorAll('#auth-links a, #auth-links-mobile a').forEach((link) => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        }
+
+        function renderUpgradeArea(plan) {
+            const area = document.getElementById('upgrade-area');
+            const pending = sessionStorage.getItem(PENDING_PLAN_KEY);
+            const target = pending && PLANS[pending] && PLANS[pending].rank > PLANS[plan].rank ? pending : null;
+
+            if (!target && plan !== 'free') {
+                area.innerHTML = '';
+                return;
+            }
+
+            const targetPlan = target || 'library';
+            const checkoutUrl = SITE_CONFIG.checkoutUrls[targetPlan];
+
+            const action = checkoutUrl
+                ? `<a href="${checkoutUrl}" target="_blank" rel="noopener noreferrer"
+                       class="inline-block mt-6 bg-brand-accent text-white px-8 py-3 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
+                       ${PLANS[targetPlan].name} の決済に進む
+                   </a>`
+                : `<a href="/#contact"
+                       class="inline-block mt-6 bg-brand-accent text-white px-8 py-3 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
+                       お申し込みについて問い合わせる
+                   </a>
+                   <p class="mt-3 text-xs text-gray-500">お問い合わせいただいた方に、お支払い方法をご案内します。</p>`;
+
+            area.innerHTML = `
+                <div class="border border-brand-accent rounded-lg p-6 md:p-8 bg-[#f9f9f7]">
+                    <h2 class="text-2xl mb-3">${target ? `${PLANS[target].name} へのお申し込み` : 'プランのお申し込み'}</h2>
+                    <p class="text-sm text-gray-700">
+                        ${target
+                            ? `${PLANS[target].name}（${PLANS[target].price}）のお手続きに進みます。`
+                            : '現在は無料会員です。有料プランに申し込むと、自習コンテンツと会員限定ジャーナルをご覧いただけます。'}
+                    </p>
+                    ${action}
+                </div>
+            `;
+        }
+
+        function renderLibraryContent(plan) {
+            const area = document.getElementById('library-content');
+
+            if (PLANS[plan].rank < PLANS.library.rank) {
+                area.innerHTML = `
+                    <h2 class="text-2xl mb-6 border-b pb-4">ライブラリーコンテンツ</h2>
+                    <div class="border rounded-lg p-8 text-center bg-gray-50">
+                        <p class="text-base mb-2">このコンテンツは The Library 以上のプランでご覧いただけます。</p>
+                        <p class="text-sm text-gray-600">大沼水曜会、身体動態瞑想会の配信とアーカイブをご視聴いただけます。</p>
+                    </div>
+                `;
+                return;
+            }
+
+            area.innerHTML = `
+                <h2 class="text-2xl mb-8 border-b pb-4">ライブラリーコンテンツ</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <article>
+                        <div class="visual-placeholder rounded-lg mb-4 w-full aspect-video flex items-center justify-center">
+                            <span class="text-[#5a6e5a]/70" style="font-family:'Noto Serif JP',serif;">大沼水曜会</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">大沼水曜会（配信・アーカイブ）</h3>
+                        <p class="text-sm text-gray-600">毎週水曜に行われるライブ配信と、過去の全アーカイブを視聴できます。</p>
+                    </article>
+                    <article>
+                        <div class="visual-placeholder rounded-lg mb-4 w-full aspect-video flex items-center justify-center">
+                            <span class="text-[#5a6e5a]/70" style="font-family:'Noto Serif JP',serif;">身体動態瞑想会</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">身体動態瞑想会（配信・アーカイブ）</h3>
+                        <p class="text-sm text-gray-600">ガイド付きの瞑想セッション。ライブ参加とアーカイブ視聴が可能です。</p>
+                    </article>
+                </div>
+            `;
+        }
+
+        // Zoomの接続情報はHTMLに書かず、権限のある会員だけがFirestoreから取得する。
+        async function fetchProtected(docId) {
+            if (!firebaseReady) return null;
+            try {
+                const snapshot = await FB.getDoc(FB.doc(db, 'protected', docId));
+                return snapshot.exists() ? snapshot.data() : null;
+            } catch (err) {
+                console.error('接続情報の取得に失敗しました:', err);
+                return null;
+            }
+        }
+
+        function renderZoomInfo(data) {
+            if (!data || !data.meetingId) {
+                return `<p class="mt-4 text-xs text-gray-600 bg-gray-100 p-3 rounded">Zoomの接続情報は、ご予約完了後のご案内でお知らせします。</p>`;
+            }
+            return `
+                <div class="mt-4 text-xs bg-gray-100 p-3 rounded">
+                    <strong>Zoom情報:</strong><br>
+                    ミーティング ID: ${data.meetingId}<br>
+                    ${data.passcode ? `パスコード: ${data.passcode}` : ''}
+                </div>
+                <p class="mt-2 text-xs text-gray-500">この情報は会員限定です。第三者への共有はご遠慮ください。</p>
+            `;
+        }
+
+        async function renderSessionBooking(plan) {
+            const container = document.getElementById('session-booking');
+            container.innerHTML = '';
+
+            const rank = PLANS[plan].rank;
+            if (rank < PLANS.collective.rank) return;
+
+            let html = '';
+
+            const groupZoom = await fetchProtected('zoom_group');
+            html += `
+                <h2 class="text-2xl mb-8 border-b pb-4">セッション予約</h2>
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-xl font-semibold mb-4">グループカウンセリング</h3>
+                    <p class="text-sm text-gray-600 mb-4">月1回のグループセッションにご参加いただけます。以下の手順でご予約ください。</p>
+                    <ol class="list-decimal list-inside text-sm space-y-2">
+                        <li>下のボタンからSquareでご希望の日時を予約します。</li>
+                        <li>予約後、こちらの<a href="https://forms.gle/cQUFbUtoByNqLKLP6" target="_blank" rel="noopener noreferrer" class="text-brand-accent underline">フォーム</a>に必要事項をご記入ください。</li>
+                        <li>当日は、予約時間にZoomへご入室ください。</li>
+                    </ol>
+                    ${renderZoomInfo(groupZoom)}
+                    <a href="https://app.squareup.com/appointments/book/classes/mlm1yevf1urskb/MMQ0KFT5CAMRZ/classes" target="_blank" rel="noopener noreferrer"
+                       class="inline-block mt-6 bg-brand-accent text-white px-8 py-2 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
+                        グループセッションを予約する
+                    </a>
+                </div>
+            `;
+
+            if (rank >= PLANS.essential.rank) {
+                const privateZoom = await fetchProtected('zoom_private');
+                html += `
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-4">個人カウンセリング</h3>
+                        <p class="text-sm text-gray-600 mb-4">月1回の個人セッションにご参加いただけます。以下の手順でご予約ください。</p>
+                        <ol class="list-decimal list-inside text-sm space-y-2">
+                            <li>下のボタンからSquareでご希望の日時を予約します。</li>
+                            <li>当日は、予約時間にZoomへご入室ください。</li>
+                        </ol>
+                        ${renderZoomInfo(privateZoom)}
+                        <a href="https://book.squareup.com/appointments/mlm1yevf1urskb/location/MMQ0KFT5CAMRZ/services/RF3HMIXD4X2B4SKZRAJXTLKB" target="_blank" rel="noopener noreferrer"
+                           class="inline-block mt-6 bg-brand-accent text-white px-8 py-2 rounded-md font-medium text-sm hover:bg-opacity-80 transition-colors">
+                            個人セッションを予約する
+                        </a>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function getAuthErrorMessage(code) {
+            switch (code) {
+                case 'auth/weak-password':          return 'パスワードは6文字以上で入力してください。';
+                case 'auth/email-already-in-use':   return 'このメールアドレスは既に使用されています。ログインをお試しください。';
+                case 'auth/invalid-email':          return '有効なメールアドレスを入力してください。';
+                case 'auth/network-request-failed': return '通信に失敗しました。電波状況をご確認のうえ、再度お試しください。';
+                case 'auth/too-many-requests':      return '試行回数が上限に達しました。しばらく時間をおいてお試しください。';
+                case 'auth/user-not-found':
+                case 'auth/wrong-password':
+                case 'auth/invalid-credential':
+                    return 'メールアドレスまたはパスワードが間違っています。';
+                default:
+                    return 'エラーが発生しました。しばらくしてから再度お試しください。';
+            }
+        }
+
+        // 先に表示を確定させる。この時点でメニュー・ページ遷移・フォームは動作する。
+        handleRoute();
+
+        /* =========================================================================
+           Firebaseの読み込み。
+           静的importにすると、CDNに一度でも到達できなかったときスクリプト全体が
+           実行されず、メニューやフォームまで動かなくなる。そのため動的importで
+           読み込み、失敗しても上記のUIは生き残るようにしている。
+           ========================================================================= */
+        try {
+            const [appModule, authModule, storeModule] = await Promise.all([
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"),
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"),
+                import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js")
+            ]);
+
+            FB = {
+                signOut: authModule.signOut,
+                doc: storeModule.doc,
+                getDoc: storeModule.getDoc,
+                setDoc: storeModule.setDoc,
+                addDoc: storeModule.addDoc,
+                collection: storeModule.collection,
+                serverTimestamp: storeModule.serverTimestamp
+            };
+
+            const app = appModule.initializeApp(firebaseConfig);
+            auth = authModule.getAuth(app);
+            db = storeModule.getFirestore(app);
+            firebaseReady = true;
+
+            authModule.onAuthStateChanged(auth, async (user) => {
+                authResolved = true;
+                currentUser = user;
+
+                if (!user) {
+                    currentPlan = 'free';
+                    renderAuthLinks(false);
+                    if (dashboardPage.classList.contains('active')) window.location.hash = '#login';
+                    return;
+                }
+
+                let userData = { plan: 'free' };
+                try {
+                    const snapshot = await FB.getDoc(FB.doc(db, 'users', user.uid));
+                    if (snapshot.exists()) userData = snapshot.data();
+                } catch (err) {
+                    console.error('ユーザー情報の取得に失敗しました:', err);
+                }
+
+                currentPlan = PLANS[userData.plan] ? userData.plan : 'free';
+                renderAuthLinks(true);
+
+                document.getElementById('user-email-dashboard').textContent = user.email;
+                document.getElementById('user-plan').textContent = PLANS[currentPlan].name;
+
+                renderUpgradeArea(currentPlan);
+                renderLibraryContent(currentPlan);
+                await renderSessionBooking(currentPlan);
+
+                // ログイン直後、または #mypage で読み込んだ場合はマイページを表示する
+                if (authPage.classList.contains('active')) window.location.hash = '#mypage';
+                else if (window.location.hash === '#mypage') showPage('dashboard');
+            });
+
+            const signupForm = document.getElementById('signup');
+            const loginForm  = document.getElementById('login');
+
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authError.textContent = '';
+                const email    = document.getElementById('signup-email').value.trim();
+                const password = document.getElementById('signup-password').value;
+
+                try {
+                    const credential = await authModule.createUserWithEmailAndPassword(auth, email, password);
+                    const requestedPlan = sessionStorage.getItem(PENDING_PLAN_KEY);
+
+                    // 新規登録は必ず無料会員から。有料プランは決済の確認後にのみ付与する。
+                    await FB.setDoc(FB.doc(db, 'users', credential.user.uid), {
+                        email: credential.user.email,
+                        plan: 'free',
+                        requestedPlan: requestedPlan && PLANS[requestedPlan] ? requestedPlan : null,
+                        createdAt: FB.serverTimestamp()
+                    });
+
+                    gtag('event', 'sign_up', { method: 'email' });
+                    signupForm.reset();
+                } catch (err) {
+                    authError.textContent = getAuthErrorMessage(err.code);
+                }
+            });
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authError.textContent = '';
+                const email    = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                try {
+                    await authModule.signInWithEmailAndPassword(auth, email, password);
+                    gtag('event', 'login', { method: 'email' });
+                    loginForm.reset();
+                } catch (err) {
+                    authError.textContent = getAuthErrorMessage(err.code);
+                }
+            });
+
+        } catch (err) {
+            console.error('Firebaseの読み込みに失敗しました:', err);
+            authResolved = true;
+
+            const message = '<span class="text-red-600 text-xs">ログイン機能を読み込めませんでした</span>';
+            authLinks.innerHTML = message;
+            authLinksMobile.innerHTML = message;
+            authError.textContent = '現在ログイン機能をご利用いただけません。時間をおいて再度お試しください。';
+
+            if (dashboardPage.classList.contains('active')) window.location.hash = '';
+        }
     </script>
 </body>
 </html>
-

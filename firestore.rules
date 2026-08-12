@@ -1,0 +1,86 @@
+rules_version = '2';
+
+// somaticstudio Firestore セキュリティルール
+//
+// 方針:
+//   - 有料プラン(plan)はサーバー側（管理者・決済Webhook）でのみ付与する。
+//     利用者が自分でplanを書き換えて有料コンテンツに到達できないようにする。
+//   - Zoom接続情報などの限定情報は protected コレクションに置き、
+//     該当プランの会員だけが読めるようにする。
+//   - 問い合わせとニュースレター登録は、誰でも「書き込みだけ」できる。
+//     読み出しは管理コンソール（Admin SDK）からのみ。
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function planOf(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data.plan;
+    }
+
+    function isValidEmail(value) {
+      return value is string
+             && value.size() > 3
+             && value.size() <= 200
+             && value.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$');
+    }
+
+    // ---------------- 会員情報 ----------------
+    match /users/{uid} {
+      allow read: if isSignedIn() && request.auth.uid == uid;
+
+      // 新規登録は必ず無料会員から。
+      allow create: if isSignedIn()
+                    && request.auth.uid == uid
+                    && request.resource.data.plan == 'free';
+
+      // 本人が更新できるのはプロフィール項目のみ。planは変更できない。
+      allow update: if isSignedIn()
+                    && request.auth.uid == uid
+                    && request.resource.data.plan == resource.data.plan;
+
+      allow delete: if false;
+    }
+
+    // ---------------- 限定情報（Zoom接続情報など） ----------------
+    match /protected/zoom_group {
+      allow read: if isSignedIn() && planOf(request.auth.uid) in ['collective', 'essential'];
+      allow write: if false;
+    }
+
+    match /protected/zoom_private {
+      allow read: if isSignedIn() && planOf(request.auth.uid) == 'essential';
+      allow write: if false;
+    }
+
+    match /protected/{document=**} {
+      allow read, write: if false;
+    }
+
+    // ---------------- お問い合わせ ----------------
+    match /contacts/{docId} {
+      allow create: if isValidEmail(request.resource.data.email)
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() > 0
+                    && request.resource.data.message.size() <= 4000;
+      allow read, update, delete: if false;
+    }
+
+    // ---------------- ニュースレター登録 ----------------
+    match /newsletter_subscribers/{docId} {
+      allow create: if isValidEmail(request.resource.data.email);
+      allow read, update, delete: if false;
+    }
+
+    // 上記以外はすべて拒否
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
