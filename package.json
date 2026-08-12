@@ -1,0 +1,14 @@
+{
+  "name": "somaticstudio-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "somaticstudio のウェブサイト",
+  "scripts": {
+    "build": "tailwindcss -i src/tailwind.css -o public/assets/tailwind.css --minify",
+    "watch": "tailwindcss -i src/tailwind.css -o public/assets/tailwind.css --watch",
+    "deploy": "npm run build && firebase deploy --only hosting,firestore:rules"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

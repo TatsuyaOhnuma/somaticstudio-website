@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /terms.html
+Disallow: /privacy.html
+Disallow: /tokushoho.html
+
+Sitemap: https://somatic-studio-e53b8.web.app/sitemap.xml
