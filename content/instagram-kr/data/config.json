@@ -1,0 +1,20 @@
+{
+  "account": "somaticstudio KR (Instagram / Korean)",
+  "author": "Tatsuya Ohnuma (오누마 타츠야)",
+  "timezone": "Asia/Seoul",
+  "post_time": "21:00",
+  "start_date": "2026-09-21",
+  "end_date": "2026-12-20",
+  "total_posts": 91,
+  "cadence": "1 post / day",
+  "weekday_pillars": {
+    "Mon": "이완 프로토콜 (실습)",
+    "Tue": "몸의 과학 (이론)",
+    "Wed": "증상별 처방 (검색 유입)",
+    "Thu": "마음과 몸 (공감)",
+    "Fri": "오해를 깬다 (저장 유도)",
+    "Sat": "감각 훈련 (참여 유도)",
+    "Sun": "철학·에세이 (브랜드)"
+  },
+  "disclaimer_ko": "※ 본 콘텐츠는 교육·정보 제공 목적이며 의학적 진단이나 치료를 대체하지 않습니다. 통증이 지속되면 전문의와 상담하세요."
+}
